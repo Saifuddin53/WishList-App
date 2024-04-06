@@ -1,14 +1,24 @@
 package com.myprojects.wishlistapp.ui
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.myprojects.wishlistapp.R
 
 
@@ -17,8 +27,16 @@ import com.myprojects.wishlistapp.R
 fun HomeView() {
     Scaffold (
         modifier = Modifier,
-        topBar = { AppBar("WishListapp") }
-    )
+        topBar = { AppBar(title = "dfskl", onBackNav = {}) }
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+
+        }
+    }
 }
 
 
@@ -30,9 +48,16 @@ fun AppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = "")
+            Text(text = "WishList App",
+                color = colorResource(R.color.white),
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .heightIn(max = 24.dp),
+                fontSize = 20.sp
+            )
         },
         elevation = 3.dp,
-        backgroundColor = colorResource(id = R.color.app_bar_color)
+        backgroundColor = colorResource(id = R.color.app_bar_color), 
+        navigationIcon = { Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")}
     )
 }
