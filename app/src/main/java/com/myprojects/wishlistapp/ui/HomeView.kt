@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.IconButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -11,6 +12,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.ui.Modifier
@@ -27,7 +29,7 @@ import com.myprojects.wishlistapp.R
 fun HomeView() {
     Scaffold (
         modifier = Modifier,
-        topBar = { AppBar(title = "dfskl", onBackNav = {}) }
+        topBar = { AppBar(title = "WishList", onBackNav = {}) }
     ) {
         LazyColumn(
             modifier = Modifier
@@ -46,13 +48,23 @@ fun AppBar(
     title: String,
     onBackNav: () -> Unit
 ) {
+
+    val navigationIcon: (@Composable () -> Unit)? = {
+        IconButton(onClick = onBackNav) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                tint = Color.White,
+                contentDescription = null
+            )
+        }
+    }
     TopAppBar(
         title = {
-            Text(text = "WishList App",
+            Text(text = title,
                 color = colorResource(R.color.white),
                 modifier = Modifier
                     .padding(start = 4.dp)
-                    .heightIn(max = 24.dp),
+                    .heightIn(max = 28.dp),
                 fontSize = 20.sp
             )
         },
