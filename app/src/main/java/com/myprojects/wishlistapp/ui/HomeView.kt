@@ -111,7 +111,7 @@ fun WishItem(wish: Wish, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 8.dp, start = 8.dp, end = 8.dp)
-            .clickable { },
+            ,
         elevation = 8.dp
     ) {
         Column(
