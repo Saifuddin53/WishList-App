@@ -1,12 +1,13 @@
 package com.myprojects.wishlistapp.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.TopAppBar
@@ -21,16 +22,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myprojects.wishlistapp.R
+import com.myprojects.wishlistapp.Wish
 
 
 @SuppressLint("ResourceAsColor")
 @Preview(showBackground = true)
 @Composable
 fun HomeView() {
+    val wishList: List<Wish> = listOf(Wish(2, "This is the title", "Descritption of title"))
+
     Scaffold (
         modifier = Modifier,
         topBar = { AppBar(title = "WishList", onBackNav = {}) },
@@ -51,7 +56,12 @@ fun HomeView() {
                 .fillMaxSize()
                 .padding(it)
         ) {
+            items(wishList) {
+                wish ->
+                WishItem(wish = wish) {
 
+                }
+            }
         }
     }
 }
@@ -92,4 +102,25 @@ fun AppBar(
         backgroundColor = colorResource(id = R.color.app_bar_color),
         navigationIcon = navigationIcon
     )
+}
+
+
+@Composable
+fun WishItem(wish: Wish, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+            .clickable { },
+        elevation = 8.dp
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp)
+        ) {
+            Text(text = wish.title,
+                fontWeight = FontWeight.ExtraBold
+            )
+            Text(text = wish.description)
+        }
+    }
 }
