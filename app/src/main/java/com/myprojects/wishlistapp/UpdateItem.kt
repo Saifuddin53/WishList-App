@@ -21,6 +21,7 @@ import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.currentCompositeKeyHash
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,7 +45,7 @@ fun AddWishView(
     Scaffold(
         topBar = { AppBar(title = (
             if(id != 0L) "Update Wish" else "Add Wish" )
-            , onBackNav = {navController.currentBackStackEntry})
+            , onBackNav = {navController.previousBackStackEntry})
         })
     {
         Column(
