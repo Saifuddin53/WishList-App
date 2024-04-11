@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.myprojects.wishlistapp.AppBar
 import com.myprojects.wishlistapp.R
 import com.myprojects.wishlistapp.Wish
 
@@ -44,7 +45,7 @@ fun HomeView() {
                 modifier = Modifier.padding(20.dp),
                 backgroundColor = Color(R.color.app_bar_color),
                 contentColor = Color.White,
-                onClick = { /*TODO*/ },
+                onClick = {  },
                 shape = RoundedCornerShape(corner = CornerSize(40.dp))
             ) {
                     Icon(imageVector = Icons.Default.Add, contentDescription = "Next screen navigation button")
@@ -66,52 +67,12 @@ fun HomeView() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppBar(
-    title: String,
-    onBackNav: () -> Unit
-) {
-
-    val navigationIcon: (@Composable () -> Unit)? =
-        if(!title.contains("WishList")) {
-            {
-                IconButton(onClick = onBackNav) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        tint = Color.White,
-                        contentDescription = null
-                    )
-                }
-            }
-        }else {
-            null
-        }
-
-    TopAppBar(
-        title = {
-            Text(text = title,
-                color = colorResource(R.color.white),
-                modifier = Modifier
-                    .padding(start = 4.dp)
-                    .heightIn(max = 28.dp),
-                fontSize = 20.sp
-            )
-        },
-        elevation = 3.dp,
-        backgroundColor = colorResource(id = R.color.app_bar_color),
-        navigationIcon = navigationIcon
-    )
-}
-
-
 @Composable
 fun WishItem(wish: Wish, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 8.dp, start = 8.dp, end = 8.dp)
-            ,
+            .padding(top = 8.dp, start = 8.dp, end = 8.dp),
         elevation = 8.dp
     ) {
         Column(
