@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AddWishView(0L, viewModel(), navController = rememberNavController())
+                    Navigation()
                 }
             }
         }

@@ -26,15 +26,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.myprojects.wishlistapp.AppBar
 import com.myprojects.wishlistapp.R
+import com.myprojects.wishlistapp.Screen
 import com.myprojects.wishlistapp.Wish
 
 
 @SuppressLint("ResourceAsColor")
-@Preview(showBackground = true)
 @Composable
-fun HomeView() {
+fun HomeView(navController: NavController) {
     val wishList: List<Wish> = listOf(Wish(2, "This is the title", "Descritption of title"))
 
     Scaffold (
@@ -45,7 +46,9 @@ fun HomeView() {
                 modifier = Modifier.padding(20.dp),
                 backgroundColor = Color(R.color.app_bar_color),
                 contentColor = Color.White,
-                onClick = {  },
+                onClick = {
+                          navController.navigate(Screen.UpdateScreen.route)
+                },
                 shape = RoundedCornerShape(corner = CornerSize(40.dp))
             ) {
                     Icon(imageVector = Icons.Default.Add, contentDescription = "Next screen navigation button")

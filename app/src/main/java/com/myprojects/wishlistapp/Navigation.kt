@@ -15,10 +15,10 @@ fun Navigation(wishViewModel: WishViewModel = viewModel(),
     {
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
         composable(route = Screen.HomeScreen.route) {
-            HomeView()
+            HomeView(navController)
         }
-//        composable(route = Screen.UpdateScreen.route) {
-//            AddWishView()
-//        }
+        composable(route = Screen.UpdateScreen.route) {
+            AddWishView(0L, viewModel(), navController = navController)
+        }
     }
 }

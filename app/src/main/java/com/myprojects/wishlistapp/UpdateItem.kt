@@ -41,12 +41,6 @@ fun AddWishView(
     wishViewModel: WishViewModel,
     navController: NavController
 ) {
-    var valueTitle by remember {
-        mutableStateOf("")
-    }
-    var valueDescription by remember {
-        mutableStateOf("")
-    }
     Scaffold(
         topBar = { AppBar(title = (
             if(id != 0L) "Update Wish" else "Add Wish" )
@@ -62,22 +56,34 @@ fun AddWishView(
         ) {
             Spacer(modifier = Modifier.heightIn(8.dp))
 
-            ViewTextField("Title", valueTitle, {valueTitle = it})
+            ViewTextField("Title",
+                wishViewModel.wishTitleState,
+                {wishViewModel.onWishTitleChange(it)})
 
             Spacer(modifier = Modifier.heightIn(8.dp))
 
-            ViewTextField("Description", valueDescription, {valueDescription = it})
+            ViewTextField("Description",
+                wishViewModel.wishDescriptionState,
+                {wishViewModel.onWishDescriptionChange(it)})
 
             Spacer(modifier = Modifier.heightIn(40.dp))
-            
-            Button(onClick = { /*TODO*/ },
+
+            Button(onClick = {
+                if(wishViewModel.wishTitleState.isNotEmpty()
+                    &&
+                    wishViewModel.wishDescriptionState.isNotEmpty()) {
+                    //TODO update wish
+                }else {
+//                    TODO add wish
+                }
+            },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White
                 )) {
-                Text(text = "Update Wish")
+                Text(text = if(id != 0L) "Update Wish" else "Add Wish" )
             }
         }
     }
