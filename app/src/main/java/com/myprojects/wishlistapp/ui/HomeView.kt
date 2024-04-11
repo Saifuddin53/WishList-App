@@ -40,7 +40,7 @@ fun HomeView(navController: NavController) {
 
     Scaffold (
         modifier = Modifier,
-        topBar = { AppBar(title = "WishList", onBackNav = {navController.currentBackStackEntry}) },
+        topBar = { AppBar(title = "WishList", onBackNav = {}) },
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(20.dp),
