@@ -45,7 +45,7 @@ fun AddWishView(
     Scaffold(
         topBar = { AppBar(title = (
             if(id != 0L) "Update Wish" else "Add Wish" )
-            , onBackNav = {navController.previousBackStackEntry})
+            , onBackNav = {navController.navigateUp()})
         })
     {
         Column(
