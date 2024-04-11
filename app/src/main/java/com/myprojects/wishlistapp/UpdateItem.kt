@@ -61,10 +61,15 @@ fun AddWishView(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(modifier = Modifier.heightIn(8.dp))
+
             ViewTextField("Title", valueTitle, {valueTitle = it})
+
             Spacer(modifier = Modifier.heightIn(8.dp))
+
             ViewTextField("Description", valueDescription, {valueDescription = it})
+
             Spacer(modifier = Modifier.heightIn(40.dp))
+            
             Button(onClick = { /*TODO*/ },
                 modifier = Modifier
                     .fillMaxWidth()
