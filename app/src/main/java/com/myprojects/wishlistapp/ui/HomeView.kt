@@ -14,6 +14,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -22,13 +24,14 @@ import androidx.navigation.NavController
 import com.myprojects.wishlistapp.AppBar
 import com.myprojects.wishlistapp.R
 import com.myprojects.wishlistapp.Screen
+import com.myprojects.wishlistapp.WishViewModel
 import com.myprojects.wishlistapp.data.Wish
 
 
 @SuppressLint("ResourceAsColor")
 @Composable
-fun HomeView(navController: NavController) {
-    val wishList: List<Wish> = listOf(Wish(2, "This is the title", "Descritption of title"))
+fun HomeView(navController: NavController, wishViewModel: WishViewModel) {
+    val scope = rememberCoroutineScope()
 
     Scaffold (
         modifier = Modifier,
@@ -39,7 +42,7 @@ fun HomeView(navController: NavController) {
                 backgroundColor = Color(R.color.app_bar_color),
                 contentColor = Color.White,
                 onClick = {
-                          navController.navigate(Screen.UpdateScreen.route)
+                          navController.navigate(Screen.UpdateScreen.route + "/0L")
                 },
                 shape = RoundedCornerShape(corner = CornerSize(40.dp))
             ) {
@@ -47,15 +50,17 @@ fun HomeView(navController: NavController) {
             }
         }
     ) {
+        val wishList = wishViewModel.getAllWishes.collectAsState(initial = listOf())
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            items(wishList) {
+            items(wishList.value) {
                 wish ->
                 WishItem(wish = wish) {
-
+                    val id = wish.id
+                    navController.navigate(Screen.UpdateScreen.route + "/$id")
                 }
             }
         }
