@@ -1,6 +1,7 @@
 package com.myprojects.wishlistapp.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -72,7 +73,10 @@ fun WishItem(wish: Wish, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 8.dp, start = 8.dp, end = 8.dp),
+            .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+            .clickable {
+                       onClick()
+            },
         elevation = 8.dp
     ) {
         Column(

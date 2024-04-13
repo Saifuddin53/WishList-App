@@ -18,6 +18,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -46,6 +47,15 @@ fun AddWishView(
     }
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
+
+    if(id != 0L) {
+        val wish = wishViewModel.getWishById(id).collectAsState(initial = Wish(0L, "", ""))
+        wishViewModel.wishTitleState = wish.value.title
+        wishViewModel.wishDescriptionState = wish.value.description
+    }else{
+        wishViewModel.wishTitleState = ""
+        wishViewModel.wishDescriptionState = ""
+    }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -80,7 +90,12 @@ fun AddWishView(
                     &&
                     wishViewModel.wishDescriptionState.isNotEmpty()) {
                     if(id != 0L) {
-
+                            wishViewModel.updateWish(
+                                Wish(id = id,
+                                    title = wishViewModel.wishTitleState.trim(),
+                                    description = wishViewModel.wishDescriptionState)
+                            )
+                        snackMessage.value = "Wish updated successfully"
                     }else {
                         wishViewModel.insertWish(
                             Wish(title = wishViewModel.wishTitleState,

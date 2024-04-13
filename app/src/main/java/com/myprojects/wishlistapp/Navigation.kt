@@ -20,7 +20,7 @@ fun Navigation(wishViewModel: WishViewModel = viewModel(),
         composable(route = Screen.HomeScreen.route) {
             HomeView(navController, wishViewModel)
         }
-        composable(route = Screen.UpdateScreen.route + {"/id"},
+        composable(route = Screen.UpdateScreen.route + "/{id}",
             arguments = listOf(
                 navArgument("id") {
                     type = NavType.LongType
